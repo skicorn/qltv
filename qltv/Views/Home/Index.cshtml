@@ -1,38 +1,134 @@
 ﻿@{
-	ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home Page";
 }
+<link href="~/Content/dashboard.css" rel="stylesheet" />
+<div>
+    <div class="statistics">
+        <!-- Total visitors -->
+        <div class="thongke">
+            <div class="row1">
+                <div id="icondb">
+                    <img src="~/Content/images/icon_totalvistitors.png" />
+                </div>
+                <div id="time">This week</div>
+            </div>
+            <div class="soluong">1253</div>
+            <div class="ten">Total visitors</div>
+        </div>
+        <!-- New members -->
+        <div class="thongke">
+            <div class="row1">
+                <div id="icondb">
+                    <img src="~/Content/images/icon_newmembers.png" />
+                </div>
+                <div id="time">This week</div>
+            </div>
+            <div class="soluong">16</div>
+            <div class="ten">New members</div>
+        </div>
+        <!-- Borrowed books -->
+        <div class="thongke">
+            <div class="row1">
+                <div id="icondb">
+                    <img src="~/Content/images/icon_borrowedbook.png" />
+                </div>
+                <div id="time">This week</div>
+            </div>
+            <div class="soluong">432</div>
+            <div class="ten">Borrowed Books</div>
+        </div>
+        <!-- Overdue books -->
+        <div class="thongke">
+            <div class="row1">
+                <div id="icondb">
+                    <img src="~/Content/images/icon_overdoebooks.png" />
+                </div>
+                <div id="time">This week</div>
+            </div>
+            <div class="soluong">22</div>
+            <div class="ten">Overdue Books</div>
+        </div>
+    </div>
 
-<div class="chart-container">
-	<canvas id="myChart"></canvas>
+    <div class="list-container">
+        <!-- Member list -->
+        <div class="list-section">
+            <div class="list-header">
+                <span>Member list</span>
+                <a href="#">View all</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>MEMBER NAME</th>
+                        <th>ID</th>
+                        <th>BOOK ISSUED</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Aman Sharma</td>
+                        <td>B332</td>
+                        <td>Champak</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>Aman Sharma</td>
+                        <td>B332</td>
+                        <td>Champak</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>Aman Sharma</td>
+                        <td>B332</td>
+                        <td>Champak</td>
+                        <td>...</td>
+                    </tr>
+                    <!-- Repeat rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- List of books -->
+        <div class="list-section">
+            <div class="list-header">
+                <span>List of books</span>
+                <a href="#">View all</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>BOOK NAME</th>
+                        <th>BOOK CODE</th>
+                        <th>BOOK STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Twisted Love</td>
+                        <td>1342</td>
+                        <td>On Shelf</td>
+                        <td>...</td>
+                    </tr>
+                    <!-- Repeat rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Trending books -->
+    <div class="trending-books">
+        <div class="list-header">
+            <span>Trending Books</span>
+            <a href="#">View all</a>
+        </div>
+        <div class="book-list">
+            <!-- Repeat book cover images as needed -->
+            <img src="~/Content/images/book1.png" />
+            <img src="~/Content/images/book1.png" />
+            <!-- Repeat as needed -->
+        </div>
+    </div>
 </div>
-
-<script>document.addEventListener('DOMContentLoaded', function() {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'],
-                    datasets: [{
-                        label: 'Doanh thu tuần này',
-                        data: [12, 19, 3, 5, 2, 3, 11],
-                        backgroundColor: [
-                            'rgba(0, 112, 244, 1)',
-							'rgba(0, 112, 244, 1)',
-							'rgba(0, 112, 244, 1)',
-							'rgba(0, 112, 244, 1)',
-							'rgba(0, 112, 244, 1)',
-                            'rgba(0, 112, 244, 1)',
-							'rgba(0, 112, 244, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        });</script>
