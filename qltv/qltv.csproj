@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -140,9 +141,11 @@
     <Compile Include="Models\Book.cs">
       <DependentUpon>qltv.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BooksViewModel.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>qltv.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\Genre.cs">
       <DependentUpon>qltv.tt</DependentUpon>
     </Compile>
@@ -170,6 +173,7 @@
     <Compile Include="Models\Staff.cs">
       <DependentUpon>qltv.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TrendingBooksViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -190,10 +194,13 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\dashboard.css" />
+    <Content Include="Content\images\gameofthrones.jpg" />
+    <Content Include="Content\images\harrypotter.jpg" />
     <Content Include="Content\images\icon_borrowedbook.png" />
     <Content Include="Content\images\icon_newmembers.png" />
     <Content Include="Content\images\icon_overdoebooks.png" />
     <Content Include="Content\images\icon_totalvistitors.png" />
+    <Content Include="Content\images\thehobbit.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -244,7 +251,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

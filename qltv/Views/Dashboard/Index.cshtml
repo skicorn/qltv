@@ -12,7 +12,7 @@
                 </div>
                 <div id="time">This week</div>
             </div>
-            <div class="soluong">1253</div>
+            <div class="soluong">@ViewBag.TotalVisitors</div>
             <div class="ten">Total visitors</div>
         </div>
         <!-- New members -->
@@ -23,7 +23,7 @@
                 </div>
                 <div id="time">This week</div>
             </div>
-            <div class="soluong">16</div>
+            <div class="soluong">@ViewBag.NewMembers</div>
             <div class="ten">New members</div>
         </div>
         <!-- Borrowed books -->
@@ -34,7 +34,7 @@
                 </div>
                 <div id="time">This week</div>
             </div>
-            <div class="soluong">432</div>
+            <div class="soluong">@ViewBag.BorrowedBooks</div>
             <div class="ten">Borrowed Books</div>
         </div>
         <!-- Overdue books -->
@@ -45,7 +45,7 @@
                 </div>
                 <div id="time">This week</div>
             </div>
-            <div class="soluong">22</div>
+            <div class="soluong">@ViewBag.OverdueBooks</div>
             <div class="ten">Overdue Books</div>
         </div>
     </div>
@@ -61,31 +61,19 @@
                 <thead>
                     <tr>
                         <th>MEMBER NAME</th>
-                        <th>ID</th>
-                        <th>BOOK ISSUED</th>
-                        <th>ACTION</th>
+                        <th>PHONE</th>
+                        <th>EMAIL</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Aman Sharma</td>
-                        <td>B332</td>
-                        <td>Champak</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td>Aman Sharma</td>
-                        <td>B332</td>
-                        <td>Champak</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td>Aman Sharma</td>
-                        <td>B332</td>
-                        <td>Champak</td>
-                        <td>...</td>
-                    </tr>
-                    <!-- Repeat rows as needed -->
+                    @foreach (var member in ViewBag.Members)
+                    {
+                        <tr>
+                            <td>@member.Name</td>
+                            <td>@member.Phone</td>
+                            <td>@member.Email</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -106,13 +94,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Twisted Love</td>
-                        <td>1342</td>
-                        <td>On Shelf</td>
-                        <td>...</td>
-                    </tr>
-                    <!-- Repeat rows as needed -->
+                    @foreach (var book in ViewBag.Books)
+                    {
+                        <tr>
+                            <td>@book.Title</td>
+                            <td>@book.Bookcode</td>
+                            <td>@book.BookStatus</td>
+                            <td>...</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -125,10 +115,10 @@
             <a href="#">View all</a>
         </div>
         <div class="book-list">
-            <!-- Repeat book cover images as needed -->
-            <img src="~/Content/images/book1.png" />
-            <img src="~/Content/images/book1.png" />
-            <!-- Repeat as needed -->
+            @foreach (var book in ViewBag.TrendingBooks)
+            {
+                <img src="@Url.Content("~/Content/images/" + book.IMG)" alt="@book.Bookcode" />
+            }
         </div>
     </div>
 </div>
