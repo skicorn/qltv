@@ -1,0 +1,276 @@
+﻿@model qltv.ViewModels.BookView
+@{
+    <link href="~/Content/book.css" rel="stylesheet" />
+
+    ViewBag.Title = "Index";
+}
+
+<div class="header-books" style="display:flex;justify-content:space-between;">
+    <h2>Books</h2>
+    <div class="header-books-little">
+        <button type="button" class="custom-book-button-1">Add member</button>
+        <button type="button" class="btn-add-book">@Html.ActionLink("Add Book", "Create", null, new { @class = "btn btn-outline-primary" })</button>
+        <div class="notifi-book" style="position:relative; display:flex;justify-content:center;align-items:center;">
+            <img src="~/Content/asset/bell.svg" style="height:20px;width:20px;" />
+
+            <span class="noti-numb">
+                99+
+            </span>
+        </div>
+    </div>
+</div>
+@*<div class="split-content-book" style="display:flex;">
+    <div class="split-left-book" style=" width: 210px;">
+        <form method="get" action="@Url.Action("Index")">
+            <div class="border-search-area-staff" style="margin-top: 20px;">
+
+                @using (Html.BeginForm("Index", "Book", FormMethod.Get))
+                {
+                    <div class="box-left-1">
+                        <h6>Giá</h6>
+                        <h6>Bắt đầu từ</h6>
+                        <input class="input-filter-1-staff" type="number" name="min" />
+                        <h6>Đến</h6>
+                        <input class="input-filter-1-staff" type="number" name="max" />
+                     </div>
+                     }
+            </div>
+        </form>
+    </div>*@
+<div style="display:flex;justify-content:space-between">
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active btn btn-primary" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All Books</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Borrow Books</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Available Books</button>
+    </li>
+  
+</ul>
+<form method="get" style="display:flex;justify-content:right;" action="@Url.Action("Index")">
+    <div class="border-search-area-book" style="margin-top: 20px;margin-bottom:20px;">
+
+        @using (Html.BeginForm("Index", "Book", FormMethod.Get))
+        {
+            <img src="~/Content/asset/magnifying-glass-solid (4).svg" style="height:20px;width:20px;" /> <input style=" outline: none; border: none; max-width: 700px; width: 200px; background: #ffff; " placeholder="Looking for..." type="text" name="SearchString" />
+        }
+    </div>
+</form>
+ </div>
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+        <div class="split-right-book">
+            <table style="margin-bottom:30px;" class="table table-bordered border-active">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Available)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Publish)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IMG)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Author1.AuthorName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Genre.GenreName)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var books in Model.Books)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => books.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => books.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => books.Available)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => books.BookStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => books.Publish)
+                        </td>
+                        <td>
+                            @if (books.IMG != null && books.IMG.Length > 0)
+                            {
+                                <img src="data:image/jpeg;base64,@Convert.ToBase64String(books.IMG)" alt="Medicine Image" style="max-width: 100px; max-height: 80px;" />
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => books.Author1.AuthorName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => books.Genre.GenreName)
+                        </td>
+                        <td>
+
+                            @Html.ActionLink("Details", "Details", new { id = books.Bookcode }, new { @class = "text-detail-btn" })
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+        <table style="margin-bottom:30px;" class="table table-bordered border-active">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Available)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Publish)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IMG)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author1.AuthorName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genre.GenreName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var borrowBooks in Model.BorrowBook)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => borrowBooks.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => borrowBooks.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => borrowBooks.Available)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => borrowBooks.BookStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => borrowBooks.Publish)
+                    </td>
+                    <td>
+                        @if (borrowBooks.IMG != null && borrowBooks.IMG.Length > 0)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(borrowBooks.IMG)" alt="Medicine Image" style="max-width:100px;" />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => borrowBooks.Author1.AuthorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => borrowBooks.Genre.GenreName)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Details", "Details", new { id = borrowBooks.Bookcode }, new { @class = "text-detail-btn" })
+
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+        <table style="margin-bottom:30px;" class="table table-bordered border-active">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Available)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Publish)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IMG)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author1.AuthorName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genre.GenreName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var availableBooks in Model.AvailableBook)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => availableBooks.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => availableBooks.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => availableBooks.Available)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => availableBooks.BookStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => availableBooks.Publish)
+                    </td>
+                    <td>
+                        @if (availableBooks.IMG != null && availableBooks.IMG.Length > 0)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(availableBooks.IMG)" alt="Book Image" style="max-width:100px;" />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => availableBooks.Author1.AuthorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => availableBooks.Genre.GenreName)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Details", "Details", new { id = availableBooks.Bookcode }, new { @class = "text-detail-btn" })
+
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="tab-pane fade" id="pills-contact1" role="tabpanel" aria-labelledby="pills-contact1-tab" tabindex="0">..4.</div>
+</div>
+<div class="div-book">as </div>
+@*</div>*@

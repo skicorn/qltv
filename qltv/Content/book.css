@@ -1,0 +1,78 @@
+﻿.header-books{
+    display:flex;
+}
+.header-books-little{
+    display:flex;
+    justify-content:flex-end;
+    width:400px;
+}
+.notification-icon{
+    display:inline;
+}
+
+.custom-book-button-1 {
+    margin:1px 0px;
+    background-color: #3E64FF;
+    border: none;
+    color: white;
+    padding: 0px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.custom-book-button-1:hover {
+    background-color: #072ED8;
+}
+.btn-add-book{
+    border:none;
+    border-radius:0px;
+
+}
+.noti-numb {
+    font-size: 11px;
+    right: -15px;
+    position: absolute;
+    top: -2px;
+    background: #3E64FF;
+    color:#fff;
+    border-radius: 50%;
+    padding: 2px;
+}
+.text-detail-btn {
+    color: #fff;
+    text-decoration: none;
+    background: #3E64FF;
+    padding:3px 3px;
+}
+.border-search-area-book {
+    margin-top: 20px;
+    border: 1px solid #dee2e6;
+    border-radius:15px;
+    padding: 7px;  
+    width:300px;
+}
+/**box left 1*/
+.box-left-1 {
+    margin-bottom: 20px;
+    margin-right: 10px;
+    padding: 0px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+    height: 192px;
+}
+
+    .box-left-1 h6 {
+        padding-top: 10px;
+    }
+
+.input-filter-1-staff {
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
+
+.div-book{
+background:#fff;
+color:#fff;
+}

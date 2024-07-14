@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="qltvModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="Self.FK__Books__Author__04E4BC85" FromRole="Author" ToRole="Books" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Bookcode" />
+    </Key>
+    <Property Name="Bookcode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Author" Type="Int32" />
+    <Property Name="GenreID" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Available" Type="Int32" />
+    <Property Name="BookStatus" Type="Boolean" />
+    <Property Name="Publish" Type="DateTime" Precision="3" />
+    <Property Name="IMG" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Author1" Relationship="Self.FK__Books__Author__04E4BC85" FromRole="Books" ToRole="Author" />
+    <NavigationProperty Name="Genre" Relationship="Self.FK__Books__GenreID__03F0984C" FromRole="Books" ToRole="Genre" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Phone" />
+    </Key>
+    <Property Name="Phone" Type="Double" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Rentals" Relationship="Self.FK__Rental__CusPhone__7A672E12" FromRole="Customer" ToRole="Rental" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="GenreID" />
+    </Key>
+    <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenreName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="Self.FK__Books__GenreID__03F0984C" FromRole="Genre" ToRole="Books" />
+  </EntityType>
+  <EntityType Name="Rental">
+    <Key>
+      <PropertyRef Name="RentailID" />
+    </Key>
+    <Property Name="RentailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CusPhone" Type="Double" />
+    <Property Name="StaffID" Type="Int32" />
+    <Property Name="Total" Type="Double" />
+    <Property Name="DateCreate" Type="DateTime" Precision="3" />
+    <Property Name="DateReturn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Rental__CusPhone__7A672E12" FromRole="Rental" ToRole="Customer" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Rental__StaffID__7B5B524B" FromRole="Rental" ToRole="Staff" />
+    <NavigationProperty Name="RentalItems" Relationship="Self.FK__RentalIte__Renta__7F2BE32F" FromRole="Rental" ToRole="RentalItem" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="StaffID" />
+    </Key>
+    <Property Name="StaffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StaffPhone" Type="Double" />
+    <Property Name="Staffpassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Rentals" Relationship="Self.FK__Rental__StaffID__7B5B524B" FromRole="Staff" ToRole="Rental" />
+  </EntityType>
+  <EntityType Name="RentalItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RentalID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="BookID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Rental" Relationship="Self.FK__RentalIte__Renta__7F2BE32F" FromRole="RentalItem" ToRole="Rental" />
+  </EntityType>
+  <Association Name="FK__Books__Author__04E4BC85">
+    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Books" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="Author" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Books__GenreID__03F0984C">
+    <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+    <End Role="Books" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="GenreID" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="GenreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Rental__CusPhone__7A672E12">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Phone" />
+      </Principal>
+      <Dependent Role="Rental">
+        <PropertyRef Name="CusPhone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Rental__StaffID__7B5B524B">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffID" />
+      </Principal>
+      <Dependent Role="Rental">
+        <PropertyRef Name="StaffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RentalIte__Renta__7F2BE32F">
+    <End Role="Rental" Type="Self.Rental" Multiplicity="0..1" />
+    <End Role="RentalItem" Type="Self.RentalItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rental">
+        <PropertyRef Name="RentailID" />
+      </Principal>
+      <Dependent Role="RentalItem">
+        <PropertyRef Name="RentalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="qltvEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Authors" EntityType="Self.Author" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Genres" EntityType="Self.Genre" />
+    <EntitySet Name="Rentals" EntityType="Self.Rental" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="RentalItems" EntityType="Self.RentalItem" />
+    <AssociationSet Name="FK__Books__Author__04E4BC85" Association="Self.FK__Books__Author__04E4BC85">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Books__GenreID__03F0984C" Association="Self.FK__Books__GenreID__03F0984C">
+      <End Role="Genre" EntitySet="Genres" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Rental__CusPhone__7A672E12" Association="Self.FK__Rental__CusPhone__7A672E12">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Rental" EntitySet="Rentals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Rental__StaffID__7B5B524B" Association="Self.FK__Rental__StaffID__7B5B524B">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Rental" EntitySet="Rentals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RentalIte__Renta__7F2BE32F" Association="Self.FK__RentalIte__Renta__7F2BE32F">
+      <End Role="Rental" EntitySet="Rentals" />
+      <End Role="RentalItem" EntitySet="RentalItems" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

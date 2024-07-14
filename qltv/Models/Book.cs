@@ -22,7 +22,7 @@ namespace qltv.Models
         public Nullable<int> Available { get; set; }
         public Nullable<bool> BookStatus { get; set; }
         public Nullable<System.DateTime> Publish { get; set; }
-        public string IMG { get; set; }
+        public byte[] IMG { get; set; }
     
         public virtual Author Author1 { get; set; }
         public virtual Genre Genre { get; set; }

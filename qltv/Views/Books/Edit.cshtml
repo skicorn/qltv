@@ -1,0 +1,121 @@
+﻿@model qltv.Models.Book
+
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    .margin-top{
+        margin-top:20px;
+    }
+    .margin-top-10 {
+        margin-top: 10px;
+    }
+</style>
+<h2>Edit Book</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+   
+    <!-- Section: Split screen -->
+    <section class="">
+
+        <div class="container-fluid px-0">
+            <div class="row g-0">
+
+                <!-- First column -->
+                <div class="col-md-6 vh-80">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Bookcode)
+
+                    <div class="form-group " style="margin-top:30px;">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group margin-top">
+                        @Html.LabelFor(model => model.Author, "Author", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Author", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group  margin-top">
+                        @Html.LabelFor(model => model.GenreID, "GenreID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("GenreID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GenreID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group margin-top">
+                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group margin-top">
+                        @Html.LabelFor(model => model.Available, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Available, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Available, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!-- First column -->
+                <!-- Second column -->
+                <div class="col-md-6 vh-100">
+                    <div class="form-group margin-top-10">
+                        @Html.LabelFor(model => model.IMG, "Upload Image", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" name="uploadImage" id="uploadImage" />
+                        </div>
+                    </div>
+
+                    <div class="form-group margin-top-10">
+                        @Html.LabelFor(model => model.BookStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.BookStatus)
+                                @Html.ValidationMessageFor(model => model.BookStatus, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group margin-top-10">
+                        @Html.LabelFor(model => model.Publish, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Publish, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Publish, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10 margin-top-10">
+                            <input type="submit" value="Save" class="btn btn-outline-primary" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Second column -->
+
+            </div>
+        </div>
+
+    </section>
+    <!-- Section: Split screen -->
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
