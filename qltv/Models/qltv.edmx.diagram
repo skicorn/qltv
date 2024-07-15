@@ -4,17 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2534b75a2d8a40d28a475f030eb99e94" Name="Diagram1">
-        <EntityTypeShape EntityType="qltvModel.Author" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="qltvModel.Customer" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="qltvModel.Genre" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+      <Diagram DiagramId="f2913cfda6dc4700bd498d2a16c9b31f" Name="Diagram1">
+        <EntityTypeShape EntityType="qltvModel.Author" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qltvModel.Book" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="qltvModel.Customer" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qltvModel.Genre" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="qltvModel.Rental" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="qltvModel.Staff" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="qltvModel.Book" Width="1.5" PointX="5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="qltvModel.RentalItem" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="qltvModel.FK__Books__Author__04E4BC85" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="qltvModel.Staff" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="qltvModel.sysdiagram" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="qltvModel.FK__Books__Author__634EBE90" ManuallyRouted="false" />
+        <AssociationConnector Association="qltvModel.FK__Books__GenreID__625A9A57" ManuallyRouted="false" />
+        <AssociationConnector Association="qltvModel.fk_RentalItem_Bookcode" ManuallyRouted="false" />
         <AssociationConnector Association="qltvModel.FK__Rental__CusPhone__7A672E12" ManuallyRouted="false" />
-        <AssociationConnector Association="qltvModel.FK__Books__GenreID__03F0984C" ManuallyRouted="false" />
         <AssociationConnector Association="qltvModel.FK__Rental__StaffID__7B5B524B" ManuallyRouted="false" />
         <AssociationConnector Association="qltvModel.FK__RentalIte__Renta__7F2BE32F" ManuallyRouted="false" />
       </Diagram>

@@ -1,0 +1,120 @@
+﻿@model IEnumerable<qltv.Models.Rental>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Phiếu cho thuê</h2>
+
+<div class="d-flex justify-content-sm-between">
+	<div class="d-flex justify-content-end mb-3">
+		@using (Html.BeginForm("Index", "Rentals", FormMethod.Get))
+		{<div class="row">
+				<div class="col-md-3">
+					<div class="form-group mb-2">
+						@Html.Label("Số điện thoại", new { @class = "sr-only" })
+						@Html.TextBox("phone", ViewBag.phone as string, new { @class = "form-control", placeholder = "Số điện thoại" })
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group mb-2">
+						@Html.Label("Ngày bắt đầu", new { @class = "sr-only" })
+						@Html.TextBox("startDate", ViewBag.startDate as string, new { @class = "form-control", type = "date" })
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group mb-2">
+						@Html.Label("Ngày kết thúc", new { @class = "sr-only" })
+						@Html.TextBox("endDate", ViewBag.endDate as string, new { @class = "form-control", type = "date" })
+					</div>
+				</div>
+				<div class="col-md-3 d-flex align-items-end">
+					<div class="form-group mb-2">
+						<button type="submit" class="btn btn-primary">Tìm kiếm</button>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+	<div class="col-md-3 d-flex align-items-center justify-content-end">
+		<div class="form-group mb-2">
+			<a href="@Url.Action("Create")" class="btn btn-success">
+				Tạo mới
+			</a>
+		</div>
+	</div>
+
+</div>
+<table class="table">
+	<tr>
+		<th>
+			Người thuê
+		</th>
+		<th>
+			Ngày mượn
+		</th>
+		<th>
+			Ngày trả
+		</th>
+		<th>
+			Thành tiền
+		</th>
+		<th>
+			Thu ngân
+		</th>
+		<th>Trạng thái</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Customer.Phone)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DateCreate)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DateReturn)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Total)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Staff.StaffName)
+			</td>
+			@if (item.Rental_status == "Đang mượn")
+			{
+				<td class="text-success">
+					@Html.DisplayFor(modelItem => item.Rental_status)
+				</td>
+			}
+			else
+			{
+				<td class="text-danger">
+					@Html.DisplayFor(modelItem => item.Rental_status)
+				</td>
+			}
+			<td class="d-flex justify-content-sm-between">
+				<a href="@Url.Action("Details", new { id = item.RentailID })" class="btn btn-success">
+					<i class="bi bi-info-circle-fill"></i>
+				</a>
+				<a href="@Url.Action("Edit", new { id = item.RentailID })" class="btn btn-success">
+					<i class="bi bi-pencil-fill"></i>
+				</a>
+			</td>
+		</tr>
+	}
+
+</table>
+<script type="text/javascript">
+	$(function () {
+		$('.datepicker').datepicker({
+			format: 'dd/mm/yyyy',
+			autoclose: true,
+			todayHighlight: true
+		});
+	});
+</script>

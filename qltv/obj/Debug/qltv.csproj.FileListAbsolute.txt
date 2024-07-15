@@ -77,3 +77,7 @@ C:\doan\word\cnpm_th\doan\qltv\qltv\obj\Debug\qltv.csproj.CoreCompileInputs.cach
 C:\doan\word\cnpm_th\doan\qltv\qltv\obj\Debug\qltv.csproj.CopyComplete
 C:\doan\word\cnpm_th\doan\qltv\qltv\obj\Debug\qltv.dll
 C:\doan\word\cnpm_th\doan\qltv\qltv\obj\Debug\qltv.pdb
+C:\doan\word\cnpm_th\doan\qltv\qltv\bin\EntityFramework.dll
+C:\doan\word\cnpm_th\doan\qltv\qltv\bin\EntityFramework.SqlServer.dll
+C:\doan\word\cnpm_th\doan\qltv\qltv\bin\EntityFramework.xml
+C:\doan\word\cnpm_th\doan\qltv\qltv\bin\EntityFramework.SqlServer.xml

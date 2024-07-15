@@ -26,11 +26,12 @@ namespace qltv.Models
         }
     
         public virtual DbSet<Author> Authors { get; set; }
+        public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Rental> Rentals { get; set; }
-        public virtual DbSet<Staff> Staffs { get; set; }
-        public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<RentalItem> RentalItems { get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

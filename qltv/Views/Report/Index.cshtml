@@ -1,0 +1,86 @@
+﻿@model IEnumerable<qltv.Models.Rental>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thống kê kinh doanh</h2>
+
+
+<div class="d-flex h-50 w-100 justify-content-between">
+	<div class="chart-container w-50">
+		<canvas id="myChart"></canvas>
+	</div>
+
+	<div class="chart-container" style="width:40%">
+		<canvas id="bookchart"></canvas>
+	</div>	
+</div>
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'],
+				datasets: [{
+					label: 'Doanh thu tuần này',
+					data: [12, 19, 3, 5, 2, 3, 11],
+					backgroundColor: [
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false, // Ensures chart can be resized to fit container
+				plugins: {
+					legend: {
+						position: 'top', // Adjust legend position as needed
+					},
+				},
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+		//chart book
+		var ctx = document.getElementById('bookchart').getContext('2d');
+		var bookChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ['Sách A', 'Sách B', 'Sách C', 'Sách D', 'Sách E'],
+				datasets: [{
+					label: 'Số lượng cho thuê',
+					data: [20, 35, 40, 10, 15],
+					backgroundColor: [
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)',
+						'rgba(0, 112, 244, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				indexAxis: 'y'
+			}
+		});
+	});
+</script>
+

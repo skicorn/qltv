@@ -23,9 +23,12 @@ namespace qltv.Models
         public string RentailID { get; set; }
         public Nullable<double> CusPhone { get; set; }
         public Nullable<int> StaffID { get; set; }
-        public Nullable<double> Total { get; set; }
+        public Nullable<int> Total { get; set; }
         public Nullable<System.DateTime> DateCreate { get; set; }
         public Nullable<System.DateTime> DateReturn { get; set; }
+        public string Rental_status { get; set; }
+        public string Rental_Description { get; set; }
+        public Nullable<int> Discount { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Staff Staff { get; set; }

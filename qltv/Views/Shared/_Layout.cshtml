@@ -4,105 +4,129 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>@ViewBag.Title - My ASP.NET Application</title>
-	@Styles.Render("~/Content/css")
-	@Scripts.Render("~/bundles/modernizr")
+
+	<link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<script src="~/Content/bootstrap/js/bootstrap.bundle.min.js"></script><link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	@Styles.Render("~/Content/bootstrap/css")
+	@Scripts.Render("~/Content/bootstrap/js")
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 	<style>
-		html, body {
-			height: 100%;
+		body {
+			height: 100vh;
 			margin: 0;
-		}
-
-		.container-fluid {
-			height: 100%;
-		}
-
-		.row {
-			height: 100%;
-		}
-
-		.sidebar {
-			height: 100%;
-			background-color: #f8f9fa;
-			padding: 1rem;
-		}
-
-		.content {
-			height: 100%;
-			padding: 1rem;
+			padding: 0;
+			overflow: hidden;
 		}
 	</style>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-3 col-lg-2 sidebar d-flex flex-column flex-shrink-0">
-				<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-					<span class="fs-4">BATOCOM SHOP</span>
-				</a>
-				<hr>
-				<ul class="nav nav-pills flex-column mb-auto">
-					<li class="nav-item">
-						<a href="#" class="nav-link active" aria-current="page">
-							<svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-							Trang chủ
+
+	<div class="container-fluid d-flex p-0 m-0 h-100">
+		<div class="d-flex text-white flex-column flex-shrink-0 p-3" style="background-color: antiquewhite; width: 280px">
+			<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+				<span class="fs-4">BATOCOM SHOP</span>
+			</a>
+			<hr>
+			<ul class="nav nav-pills flex-column mb-auto">
+				<li class="nav-item">
+					<a href="/Home/Index" class="nav-link link-dark" aria-current="page">
+						<i class="bi bi-speedometer2"></i>
+						Trang chủ
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/Books" class="nav-link link-dark">
+						<i class="bi bi-book"></i>
+						Sách
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/Rentals" class="nav-link link-dark">
+						<i class="bi bi-receipt"></i>
+						Phiếu thuê
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/Customers" class="nav-link link-dark">
+						<i class="bi bi-person"></i>
+						Khách hàng
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-dark">
+						<i class="bi bi-person-circle"></i>
+						Nhân viên
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/Report/Index" class="nav-link link-dark">
+						<i class="bi bi-graph-up-arrow"></i>
+						Thống kê
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="@Url.Action("Logout", "Account")" class="text-white text-decoration-none btn btn-success">
+						Đăng xuất
+					</a>
+				</li>
+			</ul>
+			<hr>
+		</div>		
+		<!--container-->
+		<div class="container p-0">
+			<nav class="navbar navbar-expand navbar-light bg-white topbar mb-0 sticky-top shadow p-3 d-flex justify-content-between">
+				<!-- Sidebar Toggle (Topbar) -->
+				<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+					<i class="fa fa-bars"></i>
+				</button>
+				<!-- Topbar Search -->
+				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+					<div class="input-group">
+						<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-success" type="button">
+								<i class="fas fa-search fa-sm"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+				<!-- Topbar Navbar -->
+				<ul class="navbar-nav ml-auto">
+					<!-- Nav Item - User Information -->
+					<li class="nav-item dropdown no-arrow">
+						<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+							<img class="img-profile rounded-circle" src="https://lh3.googleusercontent.com/a/ACg8ocJzEbOawEY0fouWnCisMn7FLB_u2Dbqdd88qC4Ykq5fumwPsWhC=s360-c-no" style="height: 25px;">
 						</a>
-					</li>
-					<li>
-						<a href="#" class="nav-link link-dark">
-							<svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-							Sách
-						</a>
-					</li>
-					<li>
-						<a href="#" class="nav-link link-dark">
-							<svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-							Phiếu thuê
-						</a>
-					</li>
-					<li>
-						<a href="#" class="nav-link link-dark">
-							<svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-							Khách hàng
-						</a>
-					</li>
-					<li>
-						<a href="#" class="nav-link link-dark">
-							<svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-							Nhân viên
-						</a>
-					</li>
-					<li>
-						<a href="#" class="nav-link link-dark">
-							<svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-							Thống kê
-						</a>
+						<!-- Dropdown - User Information -->
+						<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+							<a class="dropdown-item" href="#">
+								<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+								Profile
+							</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+								<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+								Logout
+							</a>
+						</div>
 					</li>
 				</ul>
-				<hr>
-				<div class="dropdown">
-					<a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-						<strong>mdo</strong>
-					</a>
-					<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-						<li><a class="dropdown-item" href="#">New project...</a></li>
-						<li><a class="dropdown-item" href="#">Settings</a></li>
-						<li><a class="dropdown-item" href="#">Profile</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">Sign out</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-9 col-lg-10 content">
-				<div class="container body-content">
-					@RenderBody()
-					<hr />
-					<footer>
-						<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-					</footer>
-				</div>
+			</nav>
+			<div class="content p-3 h-100 overflow-auto">
+				@if (Session["UserEmail"] != null)
+				{
+					@RenderBody();
+				}
+				else
+				{
+					Response.Redirect(Url.Action("Login", "Account"));
+
+				}
 			</div>
 		</div>
 	</div>
@@ -110,5 +134,6 @@
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/bootstrap")
 	@RenderSection("scripts", required: false)
+
 </body>
 </html>

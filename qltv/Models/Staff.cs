@@ -23,6 +23,7 @@ namespace qltv.Models
         public int StaffID { get; set; }
         public Nullable<double> StaffPhone { get; set; }
         public string Staffpassword { get; set; }
+        public string StaffName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rental> Rentals { get; set; }

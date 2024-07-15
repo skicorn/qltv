@@ -1,0 +1,114 @@
+﻿﻿@model qltv.Models.Book
+
+@{
+	<link href="~/Content/book.css" rel="stylesheet" />
+
+	ViewBag.Title = "Create";
+}
+
+
+
+
+@using (Html.BeginForm("Create", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<h4>Add Book</h4>
+
+		<div class="container">
+			<div class="row row-cols-2">
+				<div class="col">
+					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					<div class="form-group">
+						@Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Author, "Author", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("Author", null, htmlAttributes: new { @class = "form-control" })
+							@Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+						</div>
+
+					</div>
+					<div class="form-group">
+						@Html.LabelFor(model => model.GenreID, "GenreID", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("GenreID", null, htmlAttributes: new { @class = "form-control" })
+							@Html.ValidationMessageFor(model => model.GenreID, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						@Html.LabelFor(model => model.Available, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.Available, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.Available, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.BookStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							<div class="checkbox">
+								@Html.EditorFor(model => model.BookStatus)
+								@Html.ValidationMessageFor(model => model.BookStatus, "", new { @class = "text-danger" })
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.Publish, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.Publish, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.Publish, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.IMG, "Book Image", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							<input type="file" name="IMG" class="form-control" />
+							@Html.ValidationMessageFor(model => model.IMG, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+
+		<div class="form-group" style="display:flex;margin-top:30px;">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Create" class="btn btn btn-primary text-white" />
+			</div>
+			<div>
+
+				@Html.ActionLink("Return", "Index", null, new { @class = "btn btn-outline-primary" })
+			</div>
+		</div>
+	</div>
+}
+
+
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

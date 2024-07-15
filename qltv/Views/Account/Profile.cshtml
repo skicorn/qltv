@@ -1,0 +1,26 @@
+﻿@model qltv.Models.Staff
+
+@{
+    ViewBag.Title = "Hồ sơ cá nhân";
+}
+
+<h2>Hồ sơ cá nhân</h2>
+
+<div class="form-horizontal">
+    <h4>Thông tin cá nhân</h4>
+    <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaffPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <p class="form-control-static">@Model.StaffPhone</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Staffpassword, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <p class="form-control-static">******</p>
+        </div>
+    </div>
+</div>

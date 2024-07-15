@@ -1,0 +1,261 @@
+﻿@model qltv.Models.Rental
+
+@{
+	ViewBag.Title = "Create";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tạo phiếu thuê</h2>
+<hr />
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	<div class="form-horizontal ">
+		<div class="row d-flex justify-content-between">
+			<div class="col-md-6">
+				<div class="form-group">
+					@Html.LabelFor(model => model.CusPhone, "Người thuê", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col shadow-sm">
+						@Html.DropDownList("CusPhone", null, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.CusPhone, "", new { @class = "text-danger" })
+					</div>
+					<hr />
+				</div>
+
+				<div class="form-group col d-flex justify-content-between">
+					<div class="col">
+						@Html.LabelFor(model => model.DateReturn, "Ngày trả", htmlAttributes: new { @class = "control-label " })
+						<div class="col-10 shadow-sm">
+							@Html.EditorFor(model => model.DateReturn, new { htmlAttributes = new { @class = "form-control col shadow-sm", @type = "date" } })
+							@Html.ValidationMessageFor(model => model.DateReturn, "", new { @class = "text-danger" })
+						</div>
+						<hr />
+					</div>
+					<div class="col d-flex  justify-content-end flex-column">
+						@Html.LabelFor(model => model.Discount, "Giảm giá", htmlAttributes: new { @class = "control-label " })
+						<div class="col-10 shadow-sm ">
+							@Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control col shadow-sm", @type = "number" } })
+							@Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+						</div>
+						<hr />
+					</div>
+				</div>
+
+				<div id="addBookSection">
+					<div class="form-group ">
+						<div class="row d-flex justify-content-between">
+							@Html.Partial("~/Views/Shared/Partial/booksearch.cshtml")
+							<div class="col-md-3">
+								<label for="quantity">Số lượng</label>
+								<input type="number" id="quantity" class="form-control quantity" placeholder="Quantity" inputmode="numeric" pattern="[0-9]*" title="Please enter a whole number" />
+							</div>
+							<div class="col-md-2  d-flex align-items-end">
+								<button type="button" id="btn-add-book" class="btn btn-primary  shadow-sm">Thêm</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5 shadow-lg m-2">
+				<div class="tablebook">
+					<table class="table" id="rentalItemTable">
+						<thead>
+							<tr>
+								<th>Tên sách</th>
+								<th>Số lượng</th>
+								<th>Thành tiền</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="rentalDetailsTableBody">
+							<!-- Existing bill details will be added here dynamically -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<br />
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</div>
+	</div>
+}
+<br />
+<div class="d-flex form-group col-md-offset-2 col-md-2">
+	<a href="@Url.Action("Index")" class="btn btn-success">
+		Trở về
+	</a>
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+<script>
+        $(document).ready(function () {
+            function setupBook() {
+                $('#searchBook').keyup(function () {
+                    var searchQuery = $(this).val();
+                    if (searchQuery.length >= 1) {
+                        $.ajax({
+                            url: '@Url.Action("SearchBook", "Rentals")',
+							data: { name: searchQuery },
+							success: function (data) {
+							var resultList = $('#bookResult');
+							resultList.empty();
+							$.each(data, function (index, book) {
+							resultList.append('<li class="list-group-item" data-id="' + book.Bookcode + '">' + book.Title + ' - ' + book.Author + '</li>');
+							});
+
+							// Update click event for list-group-item
+							resultList.find('.list-group-item').click(function () {
+							var selectedBookId = $(this).data('id');
+							var selectedBookName = $(this).text().split(' - ')[0];
+							$('.selected-book').val(selectedBookId);
+							$('#searchBook').val(selectedBookName);
+							$('#bookResult').empty();
+							});
+							}
+							});
+							} else {
+							$('#bookResult').empty();
+							}
+							});
+							}
+
+							// Initial setup
+							setupBook();
+
+							// Add book to the table
+							function setupBook() {
+							$('#searchBook').keyup(function () {
+							var searchQuery = $(this).val();
+							if (searchQuery.length >= 1) {
+							$.ajax({
+							url: '@Url.Action("SearchBook", "Rentals")',
+							data: { name: searchQuery },
+							success: function (data) {
+							var resultList = $('#bookResult');
+							resultList.empty();
+							$.each(data, function (index, book) {
+							resultList.append('<li class="list-group-item" data-id="' + book.Bookcode + '">' + book.Title + ' - ' + book.Author + '</li>');
+							});
+
+							// Update click event for list-group-item
+							resultList.find('.list-group-item').click(function () {
+							var selectedBookId = $(this).data('id');
+							var selectedBookName = $(this).text().split(' - ')[0];
+							$('.selected-book').val(selectedBookId);
+							$('#searchBook').val(selectedBookName);
+							$('#bookResult').empty();
+							});
+							}
+							});
+							} else {
+							$('#bookResult').empty();
+							}
+							});
+							}
+
+							// Initial setup
+							setupBook();
+
+							// Add book to the table
+							$('#btn-add-book').click(function () {
+							var selectedBookID = $('.selected-book').val();
+							var selectedBookname = $('#searchBook').val();
+							var quantity = parseInt($('#quantity').val()); // Ensure quantity is parsed as integer
+
+							if (!isNaN(quantity) && selectedBookID && selectedBookname && quantity > 0) {
+							// Call checkcount function before adding the book
+							$.ajax({
+							url: '@Url.Action("checkcount", "Rentals")', // Adjust the URL to your action method
+							type: 'GET',
+							data: { code: selectedBookID, quantity: quantity },
+							success: function (result) {
+							if (result.check == true) {
+							$.ajax({
+							url: '@Url.Action("GetBookInfo", "Rentals")',
+							type: 'GET',
+							data: { bookid: selectedBookID },
+							success: function (result) {
+							if (result.success) {
+							var price = quantity * result.price;
+							var bookExist = false;
+
+							// Check if the book already exists in the table
+							$('#rentalDetailsTableBody tr').each(function () {
+							var existingBookID = $(this).find('input[name*=".Bookcode"]').val();
+
+							if (existingBookID == selectedBookID) {
+							var existingQuantity = parseInt($(this).find('input[name*=".Quantity"]').val());
+							var newQuantity = existingQuantity + quantity;
+							var newPrice = newQuantity * result.price;
+
+							$(this).find('input[name*=".Quantity"]').val(newQuantity);
+							$(this).find('td:eq(1)').val(newQuantity);
+							$(this).find('input[name*=".Price"]').val(newPrice.toFixed(2));
+							$(this).find('td:eq(2)').text(newPrice.toFixed(2));
+
+							bookExist = true;
+							}
+							});
+
+							// If book does not exist, add a new row
+							if (!bookExist) {
+							var newRow = `<tr>
+								<td>
+									<input type="hidden" name="RentalItems[${$('#rentalDetailsTableBody tr').length}].Bookcode" value="${selectedBookID}" />
+									${selectedBookname}
+								</td>
+								<td>
+									<input type="number" name="RentalItems[${$('#rentalDetailsTableBody tr').length}].Quantity" style="width: 70px; border: none;border-bottom: 2px solid #000;outline: none;width: 70px;" value="${quantity}" />
+								</td>
+								<td>
+									<input type="hidden" name="RentalItems[${$('#rentalDetailsTableBody tr').length}].Price" value="${price}" />
+									${price.toFixed(2)}
+								</td>
+								<td>
+									<button type="button" class="btn btn-danger btn-remove-book">Xóa</button>
+								</td>
+							</tr>`;
+
+							$('#rentalDetailsTableBody').append(newRow);
+							}
+
+							// Clear input fields after adding book
+							$('#searchBook').val('');
+							$('#quantity').val('');
+							$('.selected-book').val('');
+
+							// Re-setup book search after adding a row
+							setupBook();
+							} else {
+							alert(result.message);
+							}
+							}
+							});
+							} else {
+							// Show error message if checkcount fails
+							alert("Sách đã hết hoặc vượt quá số lượng tồn kho");
+							}
+							}
+							});
+							} else {
+							alert('Vui lòng nhập số lượng hợp lệ và điền đầy đủ thông tin');
+							}
+							});
+
+							// Remove book row
+							$('#rentalDetailsTableBody').on('click', '.btn-remove-book', function () {
+							$(this).closest('tr').remove();
+
+							// Update row indexes
+							$('#rentalDetailsTableBody tr').each(function (index) {
+							$(this).find('input[name*=".Bookcode"]').attr('name', `RentalItems[${index}].Bookcode`);
+							$(this).find('input[name*=".Quantity"]').attr('name', `RentalItems[${index}].Quantity`);
+							$(this).find('input[name*=".Price"]').attr('name', `RentalItems[${index}].Price`);
+							});
+							});
+							});
+</script>
+}

@@ -16,11 +16,14 @@ namespace qltv.Models
     {
         public int ID { get; set; }
         public string RentalID { get; set; }
-        public Nullable<int> BookID { get; set; }
+        public Nullable<int> Bookcode { get; set; }
         public Nullable<int> Quantity { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public Nullable<decimal> Total { get; set; }
+        public Nullable<int> Price { get; set; }
+        public Nullable<int> Total { get; set; }
+        public string BookName { get; set; }
+        public Nullable<bool> Returned { get; set; }
     
+        public virtual Book Book { get; set; }
         public virtual Rental Rental { get; set; }
     }
 }

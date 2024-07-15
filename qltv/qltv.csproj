@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -46,10 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -128,8 +129,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\BooksViewModel.cs" />
+    <Compile Include="Controllers\BookViewModel.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\CustomerViewModel.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RentalsController.cs" />
+    <Compile Include="Controllers\RentalView.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\TrendingBooksViewModel.cs" />
+    <Compile Include="Controllers\Utils.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -169,32 +181,50 @@
     <Compile Include="Models\Staff.cs">
       <DependentUpon>qltv.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>qltv.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BookView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.esm.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.esm.min.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\dashboard.css" />
+    <Content Include="Content\images\gameofthrones.jpg" />
+    <Content Include="Content\images\harrypotter.jpg" />
+    <Content Include="Content\images\icon_borrowedbook.png" />
+    <Content Include="Content\images\icon_newmembers.png" />
+    <Content Include="Content\images\icon_overdoebooks.png" />
+    <Content Include="Content\images\icon_totalrevenue.png" />
+    <Content Include="Content\images\icon_totalvistitors.png" />
+    <Content Include="Content\images\thehobbit.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Models\qltv.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>qltv.Context.cs</LastGenOutput>
       <DependentUpon>qltv.edmx</DependentUpon>
+      <LastGenOutput>qltv.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\qltv.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -207,6 +237,121 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="libman.json" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\bootstrap\js\bootstrap.esm.js.map" />
+    <Content Include="Content\bootstrap\js\bootstrap.esm.min.js.map" />
+    <Content Include="Content\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Content\bootstrap\scss\_accordion.scss" />
+    <Content Include="Content\bootstrap\scss\_alert.scss" />
+    <Content Include="Content\bootstrap\scss\_badge.scss" />
+    <Content Include="Content\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Content\bootstrap\scss\_button-group.scss" />
+    <Content Include="Content\bootstrap\scss\_buttons.scss" />
+    <Content Include="Content\bootstrap\scss\_card.scss" />
+    <Content Include="Content\bootstrap\scss\_carousel.scss" />
+    <Content Include="Content\bootstrap\scss\_close.scss" />
+    <Content Include="Content\bootstrap\scss\_containers.scss" />
+    <Content Include="Content\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Content\bootstrap\scss\_forms.scss" />
+    <Content Include="Content\bootstrap\scss\_functions.scss" />
+    <Content Include="Content\bootstrap\scss\_grid.scss" />
+    <Content Include="Content\bootstrap\scss\_helpers.scss" />
+    <Content Include="Content\bootstrap\scss\_images.scss" />
+    <Content Include="Content\bootstrap\scss\_list-group.scss" />
+    <Content Include="Content\bootstrap\scss\_maps.scss" />
+    <Content Include="Content\bootstrap\scss\_mixins.scss" />
+    <Content Include="Content\bootstrap\scss\_modal.scss" />
+    <Content Include="Content\bootstrap\scss\_nav.scss" />
+    <Content Include="Content\bootstrap\scss\_navbar.scss" />
+    <Content Include="Content\bootstrap\scss\_offcanvas.scss" />
+    <Content Include="Content\bootstrap\scss\_pagination.scss" />
+    <Content Include="Content\bootstrap\scss\_placeholders.scss" />
+    <Content Include="Content\bootstrap\scss\_popover.scss" />
+    <Content Include="Content\bootstrap\scss\_progress.scss" />
+    <Content Include="Content\bootstrap\scss\_reboot.scss" />
+    <Content Include="Content\bootstrap\scss\_root.scss" />
+    <Content Include="Content\bootstrap\scss\_spinners.scss" />
+    <Content Include="Content\bootstrap\scss\_tables.scss" />
+    <Content Include="Content\bootstrap\scss\_toasts.scss" />
+    <Content Include="Content\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Content\bootstrap\scss\_transitions.scss" />
+    <Content Include="Content\bootstrap\scss\_type.scss" />
+    <Content Include="Content\bootstrap\scss\_utilities.scss" />
+    <Content Include="Content\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Content\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Content\bootstrap\scss\bootstrap-utilities.scss" />
+    <Content Include="Content\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Content\bootstrap\scss\forms\_floating-labels.scss" />
+    <Content Include="Content\bootstrap\scss\forms\_form-check.scss" />
+    <Content Include="Content\bootstrap\scss\forms\_form-control.scss" />
+    <Content Include="Content\bootstrap\scss\forms\_form-range.scss" />
+    <Content Include="Content\bootstrap\scss\_variables-dark.scss" />
+    <Content Include="Content\bootstrap\scss\_variables.scss" />
+    <Content Include="Content\bootstrap\scss\forms\_form-select.scss" />
+    <Content Include="Content\bootstrap\scss\forms\_form-text.scss" />
+    <Content Include="Content\bootstrap\scss\forms\_input-group.scss" />
+    <Content Include="Content\bootstrap\scss\forms\_labels.scss" />
+    <Content Include="Content\bootstrap\scss\forms\_validation.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_clearfix.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_color-bg.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_colored-links.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_focus-ring.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_icon-link.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_position.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_ratio.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_stacks.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_stretched-link.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_text-truncation.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_visually-hidden.scss" />
+    <Content Include="Content\bootstrap\scss\helpers\_vr.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_backdrop.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_banner.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_color-mode.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_color-scheme.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_container.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_table-variants.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_utilities.scss" />
+    <Content Include="Content\bootstrap\scss\mixins\_visually-hidden.scss" />
+    <Content Include="Content\bootstrap\scss\utilities\_api.scss" />
+    <Content Include="Content\bootstrap\scss\vendor\_rfs.scss" />
     <EntityDeploy Include="Models\qltv.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>qltv.Designer.cs</LastGenOutput>
@@ -239,28 +384,33 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Rentals\Create.cshtml" />
+    <Content Include="Views\Rentals\Delete.cshtml" />
+    <Content Include="Views\Rentals\Edit.cshtml" />
+    <Content Include="Views\Rentals\Index.cshtml" />
+    <Content Include="Views\Rentals\Details.cshtml" />
+    <Content Include="Views\Shared\Partial\booksearch.cshtml" />
+    <Content Include="Views\Books\Create.cshtml" />
+    <Content Include="Views\Books\Delete.cshtml" />
+    <Content Include="Views\Books\Details.cshtml" />
+    <Content Include="Views\Books\Edit.cshtml" />
+    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -307,7 +457,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

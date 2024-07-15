@@ -1,0 +1,212 @@
+﻿@model qltv.Models.Rental
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		@Html.HiddenFor(model => model.RentailID)
+		<div id="rentailDetail">
+			<h2>Thông tin phiếu thuê</h2>
+			<hr />
+			<dl class="dl-horizontal">
+				<div class="row">
+					<div class="col-md-6">
+						<dl class="dl-horizontal">
+							<dt>
+								Khách hàng
+							</dt>
+							<dd>
+								@Html.DisplayFor(model => model.Customer.Phone)
+							</dd>
+
+							<dt>
+								Ngày mượn
+							</dt>
+							<dd>
+								@Html.DisplayFor(model => model.DateCreate)
+							</dd>
+
+							<dt>
+								Ngày trả
+							</dt>
+							<dd class="col-4">
+								@Html.DisplayFor(model => model.DateReturn)
+							</dd>
+						</dl>
+					</div>
+					<div class="col-md-6">
+						<dl class="dl-horizontal">
+							<dt>
+								Thành tiền
+							</dt>
+							<dd>
+								@Html.DisplayFor(model => model.Total)
+							</dd>
+
+							<dt>
+								Nhân viên thực hiện
+							</dt>
+							<dd>
+								@Html.DisplayFor(model => model.Staff.StaffName)
+							</dd>
+
+							<dt>
+								Giảm giá
+							</dt>
+							<dd class="col-2">
+								@Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</dl>
+			<table id="rentalDetailsTable" class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Tên sách</th>
+						<th>Số lượng</th>
+						<th>Giá thuê</th>
+						<th>Thành tiền</th>
+						<th>Trạng thái</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model.RentalItems)
+					{
+						<tr>
+							<td>@item.ID</td>
+							<td>@item.BookName</td>
+							<td>@item.Quantity</td>
+							<td>@item.Price</td>
+							<td>@item.Total</td>
+							<td>
+								@if (item.Returned == null)
+								{
+									<select class="form-control return-status" data-rentalitemid="@item.ID">
+										<option value="true">Đã trả</option>
+										<option value="false">Chưa trả</option>
+									</select>
+								}
+								else if (item.Returned == false)
+								{
+									<select class="form-control return-status" data-rentalitemid="@item.ID">
+										<option value="false" selected>Chưa trả</option>
+										<option value="true">Đã trả</option>
+									</select>
+								}
+								else
+								{
+									<select class="form-control return-status" data-rentalitemid="@item.ID">
+										<option value="true" selected>Đã trả</option>
+										<option value="false">Chưa trả</option>
+									</select>
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<div class="form-group d-flex">
+				<div class="col-md-offset-2 col-md-2">
+					<input type="submit" value="Lưu" class="btn btn-success" />
+				</div>
+				<div class="d-flex form-group col-md-offset-2 col-md-2">
+					<a href="@Url.Action("Index")" class="btn btn-success">
+						Trở về
+					</a>
+				</div>
+				<div class="col-md-offset-2 col-md-2">
+					<button id="returnButton" class="btn btn-success">
+						<span class="text-light">Đã trả</span>
+					</button>
+				</div>
+				<div class="d-flex form-group col-md-offset-2 col-md-2">
+					@Html.ActionLink("Delete", "Delete", new { id = Model.RentailID })
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+
+
+<!-- Include jsPDF from CDN -->
+<script src="https://unpkg.com/jspdf-invoice-template@1.3.1/dist/index.js"></script>
+@section Scripts {
+	<script type="text/javascript">
+    $(document).ready(function () {
+			$('#returnButton').click(function (e) {
+                e.preventDefault();
+
+                var rentalId = '@Model.RentailID';
+                $.ajax({
+                    url: '@Url.Action("RentalReturned", "Rentals")',
+                    type: 'POST',
+                    data: { id: rentalId },
+                    success: function (response) {
+                        // Handle success response
+                        alert('Cập nhập thành công');
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        alert('Lỗi: ' + error);
+                    }
+                });
+            });
+        $('.return-status').change(function () {
+        var rentalItemId = $(this).data('rentalitemid');
+        var returned = $(this).val() === 'true'; // Ensure this value is boolean
+
+        $.ajax({
+            url: '@Url.Action("UpdateReturnStatus", "Rentals")',
+            type: 'POST',
+            data: { rentalItemId: rentalItemId, returned: returned },
+            success: function (result) {
+                if (result.success) {
+                    alert(result.message);
+                    // Handle success as needed
+                } else {
+                    alert('Lỗi: ' + result.message);
+                }
+            },
+            error: function () {
+                alert('Error occurred while processing request.');
+            }
+        });
+    });
+        function getrental(id) {
+            $.ajax({
+                url: '@Url.Action("GetBillInfo", "Rentals")',
+                type: 'GET',
+                data: { rentalID: id },
+                success: function (response) {
+                    if (response.success) {
+                        invoicedetail = response;
+                        console.log(invoicedetail);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error retrieving bill info:", status, error);
+                    alert('Error retrieving bill info.');
+                }
+            });
+		}
+
+
+        var rentalID = '@Model.RentailID'; // Corrected spelling of RentalID
+        if (rentalID) {
+            //getRentalDetail(rentalID);
+            getrental(rentalID);
+        }
+    });
+	</script>
+}
+

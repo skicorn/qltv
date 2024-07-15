@@ -14,17 +14,25 @@ namespace qltv.Models
     
     public partial class Book
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Book()
+        {
+            this.RentalItems = new HashSet<RentalItem>();
+        }
+    
         public int Bookcode { get; set; }
         public string Title { get; set; }
         public Nullable<int> Author { get; set; }
         public Nullable<int> GenreID { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public Nullable<int> Price { get; set; }
         public Nullable<int> Available { get; set; }
         public Nullable<bool> BookStatus { get; set; }
         public Nullable<System.DateTime> Publish { get; set; }
-        public string IMG { get; set; }
+        public byte[] IMG { get; set; }
     
         public virtual Author Author1 { get; set; }
         public virtual Genre Genre { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RentalItem> RentalItems { get; set; }
     }
 }

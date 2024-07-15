@@ -1,0 +1,173 @@
+﻿﻿@model qltv.Models.Book
+
+@{
+	ViewBag.Title = "Details";
+	<link href="~/Content/book.css" rel="stylesheet" />
+	<style>
+		.height {
+			height: 38px;
+		}
+
+		.width {
+			width: 68px;
+		}
+
+		.btn-custom {
+			translate: 0px 10px;
+		}
+	</style>
+}
+
+<h2>Detail Books</h2>
+
+<div class="content">
+
+	<div class="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-5">
+					@Html.HiddenFor(model => model.IMG)
+
+					<dd>
+						@if (Model.IMG != null && Model.IMG.Length > 0)
+						{
+							<img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.IMG)" alt="Book Image" style="max-width:200px;" />
+						}
+					</dd>
+				</div>
+				<div class="col-sm-4">
+					<div class="row">
+						<div class="col-8 col-sm-6">
+							<dt>
+								@Html.DisplayNameFor(model => model.Title)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.Title)
+							</dd>
+
+							<dt>
+								@Html.DisplayNameFor(model => model.Price)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.Price)
+							</dd>
+
+							<dt>
+								@Html.DisplayNameFor(model => model.Available)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.Available)
+							</dd>
+
+							<dt>
+								@Html.DisplayNameFor(model => model.BookStatus)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.BookStatus)
+							</dd>
+
+
+						</div>
+						<div class="col-8 col-sm-6">
+							<dt>
+								@Html.DisplayNameFor(model => model.Publish)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.Publish)
+							</dd>
+
+
+
+							<dt>
+								@Html.DisplayNameFor(model => model.Author1.AuthorName)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.Author1.AuthorName)
+							</dd>
+
+							<dt>
+								@Html.DisplayNameFor(model => model.Genre.GenreName)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(model => model.Genre.GenreName)
+							</dd>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<h4>Borrow history</h4>
+<div class="table-history-detail-book">
+	<table style="margin-top:20px;" class="table table-bordered border-active">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Price)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Available)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.BookStatus)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Publish)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IMG)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Author1.AuthorName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Genre.GenreName)
+			</th>
+			<th></th>
+		</tr>
+
+
+		<tr>
+		</tr>
+
+
+	</table>
+</div>
+<div class="position-fixed start-50 bottom-0 translate-middle-x w-100 zi-99 mb-3" style="max-width: 40rem;">
+	<!-- Card -->
+	<div class="card card-sm bg-dark border-dark mx-2">
+		<div class="card-body">
+			<div class="row justify-content-center justify-content-sm-between">
+				<div class="col" style=" display: flex; align-items: center;">
+					@Html.ActionLink("Delete", "Delete", new { id = Model.Bookcode }, new { @class = "btn btn-danger" })
+				</div>
+				<!-- End Col -->
+
+				<div class="col-auto">
+					<div class="d-flex gap-3">
+
+						@Html.ActionLink("Edit", "Edit", new { id = Model.Bookcode }, new { @class = "btn btn-success height width" })  />
+						<button type="button" class="btn btn-ghost-light" style="color:#fff">  @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-ghost-light text-white" })</button>
+
+					</div>
+				</div>
+				<!-- End Col -->
+			</div>
+			<!-- End Row -->
+		</div>
+	</div>
+	<!-- End Card -->
+</div>
+
+
